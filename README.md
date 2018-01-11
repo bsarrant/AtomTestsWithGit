@@ -106,6 +106,90 @@ Installing tortoise-git to C:\Users\user\.atom\packages failed
 No releases available for tortoise-git
 ```
 
+### Lead #4 : Atom interactions with the Git's bunch of config files
+Git defines several layers of config files:
+* Local:  `config` file located in `%CLONED_GITHUB_PROJECT/.git` directory
+* Global: `.gitconfig` file located in `%USERPROFILE%` directory
+* Systemwide: `config` file located in `C:\ProgramData\Git` directory
+* Git-Win specifics: `config` file located in `C:\BS Program Files\Git\mingw64\etc`
+
+The question is how this structure could articulate with Atom ...
+
+![TortoiseGit config files menu](images/01_TortoiseConfigFilesMenu.PNG)
+
+extract of the different files:
+* local
+```
+[core]
+	repositoryformatversion = 0
+	filemode = false
+	bare = false
+	logallrefupdates = true
+	symlinks = false
+	ignorecase = true
+[remote "origin"]
+	url = git@github.com:bsarrant/AtomTestsWithGit.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+	puttykeyfile = C:\\Users\\user\\.ssh\\%PRIVATE_KEY_FILE%.ppk
+[branch "master"]
+	remote = origin
+	merge = refs/heads/master
+
+```
+* Global
+```
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	required = true
+	process = git-lfs filter-process
+[user]
+	name = %GITHUB_USERNAME%
+[user]
+	email = %USER_EMAIL%
+
+```
+* Systemwide
+```
+[core]
+	symlinks = false
+	autocrlf = true
+	fscache = true
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+	interactive = true
+[pack]
+[help]
+	format = html
+[http]
+	sslCAInfo = C:/BS Program Files/Git/mingw64/ssl/certs/ca-bundle.crt
+[diff "astextplain"]
+	textconv = astextplain
+[rebase]
+	autosquash = true
+
+```
+* Git-Win specifics
+```
+[http]
+	sslCAInfo = C:/BS Program Files/Git/mingw64/ssl/certs/ca-bundle.crt
+	sslBackend = openssl
+[diff "astextplain"]
+	textconv = astextplain
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[credential]
+	helper = manager
+[core]
+	editor = 'C:\\Program Files (x86)\\Notepad++\\notepad++.exe' -multiInst -notabbar -nosession -noPlugin
+
+```
+
 ## Interim solution
 * Using Atom for development / write-ups
 * Managing Versioning with TortoiseGit
