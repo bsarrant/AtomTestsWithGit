@@ -93,6 +93,19 @@ however it doesn't work in my case because I'm using TortoiseGit which provided 
 
 see [this link](https://ekawas.blogspot.fr/2007/03/solving-pesky-ssh-issues-in-cygwin.html)
 
+### Lead #3: installing `atom/tortoise-git`
+a package was developed for allowing Atom to interact with installed TortoiseGit
+(see [dev page](https://github.com/beckenrode/tortoise-git))
+* direct installation process with help of `package manager` seems not working
+* test with the command line `apm install tortoise-git` instead
+* results: no available realease
+```
+C:\Users\user
+λ apm install tortoise-git
+Installing tortoise-git to C:\Users\user\.atom\packages failed
+No releases available for tortoise-git
+```
+
 ## Interim solution
 * Using Atom for development / write-ups
 * Managing Versioning with TortoiseGit
